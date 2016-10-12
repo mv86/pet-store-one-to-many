@@ -17,6 +17,12 @@ class Pets
     @id = pet ['id'].to_i
   end 
 
+  def belongs_to
+    sql = "SELECT * FROM pet_store WHERE id = #{@pet_store_id}"
+    pet_store = SqlRunner.run(sql).first
+    return PetStore.new(pet_store)
+  end
+
   # def artist
   #   sql = "SELECT * FROM artists WHERE id = #{@artist_id}"
 

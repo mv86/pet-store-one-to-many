@@ -16,6 +16,13 @@ class PetStore
     @id = pet_store['id'].to_i
   end
 
+  def list_of_pets
+    sql = "SELECT * FROM pets WHERE pet_store_id = #{@id}"
+    pets = SqlRunner.run(sql)
+    result = pets.map { |pet| Pets.new(pet) }
+    return result
+  end
+
   # def albums
   #   sql = "SELECT * FROM albums WHERE artist_id = #{@id}"
 
