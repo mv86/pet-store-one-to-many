@@ -1,8 +1,9 @@
 require_relative('../db/sql_runner')
 
-class Pets
+class Pet
 
-  attr_reader :id, :name, :type, :pet_store_id
+  attr_reader :id, :pet_store_id
+  attr_accessor :name, :type
 
   def initialize(options)
     @id = options['id'].to_i
@@ -16,6 +17,26 @@ class Pets
     pet = SqlRunner.run(sql).first
     @id = pet ['id'].to_i
   end 
+
+  def self.delete_pet(id)
+    sql = "DELETE FROM pets WHERE id = #{id}"
+    SqlRunner.run(sql)
+  end
+
+  # def list_of_pet_s
+  #   sql = "SELECT * FROM pets WHERE pet_store_id = #{@id}"
+  #   pets = SqlRunner.run(sql)
+  #   result = pets.map { |pet| Pets.new(pet) }
+  #   return result
+  # end
+  def update
+    sql = "UPDATE pets SET 
+      name = '#{ @name }',
+      type = '#{ @type }'
+      WHERE id = #{@id};"
+    SqlRunner.run(sql)
+    return nil
+  end
 
   def belongs_to
     sql = "SELECT * FROM pet_store WHERE id = #{@pet_store_id}"
