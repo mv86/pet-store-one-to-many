@@ -23,12 +23,13 @@ class Pet
     SqlRunner.run(sql)
   end
 
-  # def list_of_pet_s
-  #   sql = "SELECT * FROM pets WHERE pet_store_id = #{@id}"
-  #   pets = SqlRunner.run(sql)
-  #   result = pets.map { |pet| Pets.new(pet) }
-  #   return result
-  # end
+  def self.list_all_pets
+    sql = "SELECT * FROM pets"
+    pets = SqlRunner.run(sql)
+    result = pets.map { |pet| Pet.new(pet) }
+    return result
+  end
+
   def update
     sql = "UPDATE pets SET 
       name = '#{ @name }',
@@ -43,13 +44,5 @@ class Pet
     pet_store = SqlRunner.run(sql).first
     return PetStore.new(pet_store)
   end
-
-  # def artist
-  #   sql = "SELECT * FROM artists WHERE id = #{@artist_id}"
-
-  #   artist = SqlRunner.run(sql).first
-  #   result = Artist.new(artist)
-  #   return result
-  # end
 
 end

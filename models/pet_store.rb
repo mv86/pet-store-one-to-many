@@ -51,12 +51,5 @@ class PetStore
     return nil
   end
 
-  # def albums
-  #   sql = "SELECT * FROM albums WHERE artist_id = #{@id}"
-
-  #   albums = SqlRunner.run(sql)
-  #   result = albums.map { |album| Album.new(album) }
-  #   return result
-  # end
 
 end
